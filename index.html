@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="main.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="clock-container">
+
+  <div class="number hour-1">
+    <div class="glass glass-1"></div>
+  </div>
+  <div class="number hour-2">
+    <div class="glass glass-0"></div>
+  </div>
+  <div class="number separator">
+    <div class="glass glass-points"></div>
+  </div>
+  <div class="number minute-1">
+    <div class="glass glass-2"></div>
+  </div>
+  <div class="number minute-2">
+    <div class="glass glass-8"></div>
+  </div>
+</div>
+
+<svg style="position:absolute;width:0;height:0;">
+  <symbol id="filter-body">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="0.01" result="blur" />
+    <feColorMatrix in="blur" type="matrix" result="red_channel" values="1 0 0 0 0
+      0 0 0 0 0
+      0 0 0 0 0
+      0 0 0 1 0" />
+    <feDisplacementMap in="red_channel" in2="map" scale="0.4" xChannelSelector="B" yChannelSelector="R" result="red_displaced" />
+    <feColorMatrix in="blur" type="matrix" result="green_channel" values="0 0 0 0 0
+      0 1 0 0 0
+      0 0 0 0 0
+      0 0 0 1 0" />
+    <feDisplacementMap in="green_channel" in2="map" scale="0.4" xChannelSelector="B" yChannelSelector="R" result="green_displaced" />
+    <feColorMatrix in="blur" type="matrix" result="blue_channel" values="0 0 0 0 0
+      0 0 0 0 0
+      0 0 1 0 0
+      0 0 0 1 0" />
+    <feDisplacementMap in="blue_channel" in2="map" scale="0.4" xChannelSelector="B" yChannelSelector="R" result="blue_displaced" />
+    <feComposite in="red_displaced" in2="green_displaced" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="rg_added" />
+    <feComposite in="rg_added" in2="blue_displaced" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" />
+  </symbol>
+</svg>
+
+  <mask id="shape-mask-9" maskContentUnits="objectBoundingBox">
+    <g fill="white">
+      <path d="M52.06,81.557C52.06,83.482 51.413,84.489 49.956,84.489C48.588,84.489 47.941,83.482 47.941,81.557L47.941,60.44L40.818,60.44L40.818,81.287C40.818,87.313 43.912,90.425 49.956,90.425C56.071,90.425 59.183,87.313 59.183,81.287L59.183,18.745C59.183,12.701 56.071,9.607 49.956,9.607C43.912,9.607 40.818,12.701 40.818,18.745L40.818,50.295C40.818,54.036 43.192,57.058 47.024,57.058C49.038,57.058 50.603,56.321 52.06,54.864L52.06,81.557ZM52.06,48.01C52.06,49.827 51.413,50.655 49.956,50.655C48.588,50.655 47.941,49.827 47.941,48.082L47.941,18.367C47.941,16.55 48.588,15.633 49.956,15.633C51.413,15.633 52.06,16.55 52.06,18.367L52.06,48.01Z" transform="translate(0, 0) scale(0.01)" />
+    </g>
+  </mask>
+</svg>
+
+<div id="browser-warning">
+    Visible only on Chromium Browsers
+</div>
+
+<video class="video-bg"
+       src="https://alexandrevacassin.fr/codepen/liquid-glass/bg.webm"
+       autoplay
+       loop
+       muted
+       playsinline>
+</video>
+
+
+</body>
+</html>
